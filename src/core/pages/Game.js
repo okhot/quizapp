@@ -1,9 +1,20 @@
-import React from 'react'
+import React from "react";
+import useFetch from "../../useFetch";
+import QuestionCard from "../organisms/QuestionCard";
 
 export default function Game() {
+  const question = useFetch();
+  console.log(question);
+
   return (
-    <div>
-      <h1>Game Starts</h1>
-    </div>
-  )
+    <>
+      {question.map((ques) => (
+        <QuestionCard
+        category={ques.category}
+        difficulty={ques.difficulty}
+        question={ques.question}
+         />
+      ))}
+    </>
+  );
 }
