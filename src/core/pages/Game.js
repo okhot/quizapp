@@ -1,20 +1,14 @@
-import React from "react";
-import useFetch from "../../useFetch";
+import { PageConsumer } from "../../Context";
 import QuestionCard from "../organisms/QuestionCard";
 
-export default function Game() {
-  const question = useFetch();
-  console.log(question);
-
+export default function Game({ number, moveNumber }) {
   return (
     <>
-      {question.map((ques) => (
-        <QuestionCard
-        category={ques.category}
-        difficulty={ques.difficulty}
-        question={ques.question}
-         />
-      ))}
+      <PageConsumer>
+        {({ question }) => {
+          return <QuestionCard data={question} />;
+        }}
+      </PageConsumer>
     </>
   );
 }

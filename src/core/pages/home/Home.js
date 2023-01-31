@@ -11,12 +11,12 @@ const HomeContainer = styled.div`
   line-height: 200%;
 `;
 
-export default function Home(children) {
+export default function Home({number}) {
   const navigate = useNavigate();
 
   function Move() {
     console.log("clicked")
-    navigate("/Game");
+    navigate(`/Game/${number}`);
   }
   
   return (

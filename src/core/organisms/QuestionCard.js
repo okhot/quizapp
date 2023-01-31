@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { PageConsumer } from "../../Context";
 import Button from "../atoms/Button";
 
 const Question = styled.div`
@@ -22,20 +24,34 @@ const AnswerButtons = styled.div`
   gap: 20px;
 `;
 
-export default function QuestionCard({difficulty, category, question}) {
+export default function QuestionCard({ data }) {
   return (
-    <Question>
-      <Header>
-        <h1>{category}</h1>
-        <p>difficulty:{difficulty}</p>
-      </Header>
-      <Description>
-        <p>{question}</p>
-      </Description>
-      <AnswerButtons>
-        <Button>True</Button>
-        <Button>False</Button>
-      </AnswerButtons>
-    </Question>
+    <>
+      {data.length > 0 && (
+        <PageConsumer>
+          {({ index, movePage }) => {
+            return (
+              <Question>
+                <Header>
+                  <h1>{data[index].category}</h1>
+                  <p>difficulty:{data[index].difficulty}</p>
+                </Header>
+                <Description>
+                  <p
+                    dangerouslySetInnerHTML={{ __html: data[index].question }}
+                  />
+                </Description>
+                <AnswerButtons>
+                  <Link to={index === 9 ? "/results" : `/Game/${index}`}>
+                    <Button onClick={movePage}>True</Button>
+                    <Button onClick={movePage}>False</Button>
+                  </Link>
+                </AnswerButtons>
+              </Question>
+            );
+          }}
+        </PageConsumer>
+      )}
+    </>
   );
 }
