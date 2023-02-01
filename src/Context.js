@@ -4,4 +4,4 @@ const PageContext = createContext()
 const PageProvider = PageContext.Provider
 const PageConsumer = PageContext.Consumer
 
-export {PageConsumer, PageProvider}
+export {PageConsumer, PageProvider, PageContext}
